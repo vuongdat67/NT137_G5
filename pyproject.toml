@@ -1,0 +1,134 @@
+[build-system]
+requires = ["setuptools>=72.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "malware-analyzer"
+version = "0.1.0"
+description = "Static analysis tool for malware feature extraction (Windows PE / Android APK)"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+dependencies = [
+    # ── Core Analysis ──────────────────────────────────────────────────────
+    "lief==0.17.6",                  # PE/ELF/DEX parse, C++ binding (nhanh)
+    "pefile==2024.8.26",             # PE fallback + imphash
+    "androguard==4.1.1",             # APK/DEX parse, CFG, permissions
+    "capstone==5.0.7",               # disassembly x86/x64 (C binding)
+    "yara-python==4.5.4",            # YARA rule engine
+    "python-magic==0.4.27",          # file type detection (libmagic)
+
+    # ── Hashing ────────────────────────────────────────────────────────────
+    "py-tlsh==4.12.1",               # fuzzy hash TLSH
+
+    # ── Graph / CFG ────────────────────────────────────────────────────────
+    "networkx==3.3",                 # CFG graph construction
+    "graphviz==0.20.3",              # render CFG → SVG/PNG
+
+    # ── Storage ────────────────────────────────────────────────────────────
+    "SQLAlchemy==2.0.48",
+    "alembic==1.13.3",               # DB migration
+
+    # ── API ────────────────────────────────────────────────────────────────
+    "fastapi==0.115.5",
+    "uvicorn[standard]==0.32.1",
+    "httpx==0.28.1",                 # async HTTP cho intel clients
+    "pydantic==2.10.3",
+    "pydantic-settings==2.6.1",
+
+    # ── CLI ────────────────────────────────────────────────────────────────
+    "click==8.1.7",
+    "rich==13.9.4",
+    "tqdm==4.67.1",
+
+    # ── GUI ────────────────────────────────────────────────────────────────
+    "PyQt6==6.7.0",
+    "qt-material==2.17",
+    "pyqtgraph==0.14.0",
+    "Pygments==2.19.2",              # syntax highlight JSON trong detail view
+
+    # ── Reports ────────────────────────────────────────────────────────────
+    "Jinja2==3.1.6",
+    "reportlab==4.4.10",
+
+    # ── Data ───────────────────────────────────────────────────────────────
+    "pandas==2.2.2",
+    "numpy==1.26.4",                 # giữ 1.x để compat với androguard
+    "scipy==1.12.0",
+
+    # ── Async / Perf ───────────────────────────────────────────────────────
+    "aiofiles==24.1.0",
+
+    # ── Logging ────────────────────────────────────────────────────────────
+    "loguru==0.7.2",
+
+    # ── File watching ──────────────────────────────────────────────────────
+    "watchdog==6.0.0",               # watch folder mode (daemon)
+]
+
+[project.optional-dependencies]
+fuzzy = [
+    "ssdeep-wheel>=3.4",
+]
+ml = [
+    "scikit-learn==1.5.2",
+    "lightgbm==4.5.0",
+    "joblib==1.4.2",
+]
+dev = [
+    "pytest==8.3.3",
+    "pytest-qt==4.5.0",
+    "pytest-cov==6.0.0",
+    "pytest-asyncio==0.24.0",
+    "black==24.10.0",
+    "ruff==0.8.4",
+    "mypy==1.13.0",
+    "pre-commit==4.0.1",
+]
+advanced = [
+    "angr==9.2.119",
+    "malwarebazaar==0.2.8",
+]
+
+[project.scripts]
+malware-analyzer = "malware_analyzer.cli.commands:cli"
+
+# ── Tool config ──────────────────────────────────────────────────────────────
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short --strict-markers"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "slow: tests that take > 5s",
+    "integration: integration tests",
+    "e2e: end-to-end tests",
+    "requires_samples: needs real sample files",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "W", "I", "N", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict = false
+warn_return_any = true
+warn_unused_ignores = true
+
+[tool.setuptools.packages.find]
+where = ["code"]
+exclude = ["tests*", "docs*"]
+
+[tool.setuptools]
+package-dir = {"" = "code"}

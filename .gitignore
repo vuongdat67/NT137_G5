@@ -205,3 +205,7 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+output/
+malware_analyzer.egg-info/
+malware_samples/
