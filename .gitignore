@@ -209,3 +209,12 @@ __marimo__/
 output/
 malware_analyzer.egg-info/
 malware_samples/
+
+# Project-specific runtime artifacts
+downloads/
+*.db
+*.db-journal
+config.yaml
+.env.local
+.vscode/
+*.zip
