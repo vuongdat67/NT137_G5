@@ -24,8 +24,13 @@ python -m venv .venv
 
 ```powershell
 pip install --upgrade pip
+pip install -e ".[dev]"
+```
+
+Alternative:
+
+```powershell
 pip install -r requirements.txt
-pip install -e .
 ```
 
 ## 5. Verify installation

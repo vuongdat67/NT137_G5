@@ -40,8 +40,13 @@ python -m venv .venv
 2. Install dependencies
 
 ```powershell
+pip install -e ".[dev]"
+```
+
+Alternative (if you prefer requirements file):
+
+```powershell
 pip install -r requirements.txt
-pip install -e .
 ```
 
 3. Launch GUI

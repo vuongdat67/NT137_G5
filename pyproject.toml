@@ -127,8 +127,5 @@ warn_return_any = true
 warn_unused_ignores = true
 
 [tool.setuptools.packages.find]
-where = ["code"]
+where = ["."]
 exclude = ["tests*", "docs*"]
-
-[tool.setuptools]
-package-dir = {"" = "code"}
