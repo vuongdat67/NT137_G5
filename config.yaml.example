@@ -1,0 +1,11 @@
+# Runtime config overrides (optional)
+# Environment variables with MSA_ prefix can also be used.
+
+app_name: Malware Static Analyzer
+output_dir: output
+workers: 4
+bazaar_api_key: "..."
+recursive_scan_default: false
+default_export_format: both
+packed_entropy_threshold: 7.2
+log_level: INFO

@@ -6,6 +6,7 @@ capstone==5.0.7
 yara-python==4.5.4
 python-magic==0.4.27
 py-tlsh==4.12.1
+ssdeep-wheel==3.4.1.post1
 networkx==3.3
 graphviz==0.20.3
 SQLAlchemy==2.0.48

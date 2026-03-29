@@ -218,3 +218,4 @@ config.yaml
 .env.local
 .vscode/
 *.zip
+config.yaml

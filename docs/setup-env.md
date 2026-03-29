@@ -48,7 +48,15 @@ python main.py gui
 Copy-Item ..\config.yaml.example .\config.yaml
 ```
 
-- Update API key in GUI `Intel` tab for MalwareBazaar operations.
+- `config.yaml` is loaded automatically at startup from `code/config.yaml`.
+- Set `bazaar_api_key` in that file to persist MalwareBazaar auth across runs.
+- Environment variables still take precedence, for example:
+
+```powershell
+setx MSA_BAZAAR_API_KEY "<your-api-key>"
+```
+
+- Optional: set `MSA_CONFIG_FILE` to point to a custom config path.
 
 ## 7. Common paths
 
