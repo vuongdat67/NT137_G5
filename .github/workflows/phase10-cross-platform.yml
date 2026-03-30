@@ -22,6 +22,7 @@ jobs:
 
     env:
       QT_QPA_PLATFORM: offscreen
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout
