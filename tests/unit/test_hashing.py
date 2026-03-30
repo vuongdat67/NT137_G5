@@ -14,6 +14,7 @@ def test_hash_file_deterministic(tmp_path: Path) -> None:
 
     assert first.sha256 == second.sha256
     assert len(first.sha256) == 64
+    assert len(first.sha512) == 128
 
 
 def test_hash_bytes_basic() -> None:
@@ -21,3 +22,4 @@ def test_hash_bytes_basic() -> None:
     assert result.md5
     assert result.sha1
     assert result.sha256
+    assert result.sha512

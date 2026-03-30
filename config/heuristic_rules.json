@@ -1,0 +1,62 @@
+{
+  "thresholds": {
+    "malicious": 70,
+    "suspicious": 40
+  },
+  "weights": {
+    "process_injection_combo": 30,
+    "suspicious_api_each": 3,
+    "suspicious_api_cap": 20,
+    "packed": 15,
+    "cfg_cyclomatic_threshold": 20,
+    "cfg_cyclomatic_bonus": 10,
+    "url_each": 2,
+    "url_cap": 10,
+    "url_min_count": 2,
+    "ip_each": 2,
+    "ip_cap": 8,
+    "ip_min_count": 1,
+    "registry_each": 2,
+    "registry_cap": 8,
+    "registry_min_count": 1,
+    "mutex_each": 2,
+    "mutex_cap": 8,
+    "mutex_min_count": 1,
+    "b64_min_count": 3,
+    "b64_cap": 8,
+    "yara_each": 5,
+    "yara_cap": 20,
+    "android_dangerous_permission_each": 4,
+    "android_dangerous_permission_cap": 25,
+    "android_self_signed_bonus": 10
+  },
+  "suspicious_api_keywords": [
+    "virtualalloc",
+    "virtualallocex",
+    "writeprocessmemory",
+    "createremotethread",
+    "ntcreatethreadex",
+    "queueuserapc",
+    "winexec",
+    "shellexecute",
+    "urldownloadtofile",
+    "internetopen",
+    "connect",
+    "cryptencrypt",
+    "cryptacquirecontext",
+    "regsetvalue",
+    "createservice"
+  ],
+  "dangerous_android_permissions": [
+    "android.permission.READ_SMS",
+    "android.permission.SEND_SMS",
+    "android.permission.RECEIVE_SMS",
+    "android.permission.READ_CONTACTS",
+    "android.permission.READ_CALL_LOG",
+    "android.permission.RECORD_AUDIO",
+    "android.permission.CAMERA",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.SYSTEM_ALERT_WINDOW"
+  ]
+}

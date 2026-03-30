@@ -1,0 +1,30 @@
+{
+  "PROCESS_INJECTION": [
+    "virtualalloc",
+    "virtualallocex",
+    "virtualprotect",
+    "writeprocessmemory",
+    "createremotethread",
+    "ntcreatethreadex",
+    "queueuserapc",
+    "rtlmovememory"
+  ],
+  "DYNAMIC_RESOLUTION": [
+    "loadlibrarya",
+    "loadlibraryw",
+    "getprocaddress",
+    "ldrloaddll"
+  ],
+  "NETWORKING": [
+    "internetopen",
+    "internetconnect",
+    "winhttpopen",
+    "urldownloadtofile",
+    "connect"
+  ],
+  "PERSISTENCE": [
+    "regsetvalue",
+    "createservice",
+    "writeserviceconfig"
+  ]
+}
