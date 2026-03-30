@@ -77,7 +77,8 @@ jobs:
         shell: pwsh
         working-directory: .
         run: |
-          python main.py --help
+          $py = Join-Path $env:pythonLocation "python.exe"
+          & $py -c "import subprocess,sys; p=subprocess.run([sys.executable,'main.py','--help'],capture_output=True,text=True,timeout=45); print(p.stdout); print(p.stderr,file=sys.stderr); raise SystemExit(p.returncode)"
 
       - name: Build bundled app
         working-directory: .
