@@ -36,7 +36,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libmagic1 libmagic-dev graphviz
+          sudo apt-get install -y libmagic1 libmagic-dev graphviz libegl1
 
       - name: Install Python deps
         working-directory: .
@@ -47,12 +47,12 @@ jobs:
       - name: Unit smoke tests
         working-directory: .
         run: |
-          python -m pytest -q tests/unit/test_settings.py tests/unit/test_hashing.py
+          python -m pytest -q -p no:pytestqt tests/unit/test_settings.py tests/unit/test_hashing.py
 
       - name: CLI help smoke
         working-directory: .
         run: |
-          python main.py --help
+          python -c "import subprocess, sys; p = subprocess.run([sys.executable, 'main.py', '--help'], capture_output=True, text=True, timeout=60); print(p.stdout); print(p.stderr, file=sys.stderr); raise SystemExit(p.returncode)"
 
       - name: Build bundled app
         working-directory: .
