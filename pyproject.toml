@@ -65,6 +65,9 @@ dependencies = [
 
     # ── File watching ──────────────────────────────────────────────────────
     "watchdog==6.0.0",               # watch folder mode (daemon)
+
+    # ── Packaging runtime hook deps ────────────────────────────────────────
+    "backports.tarfile==1.2.0",
 ]
 
 [project.optional-dependencies]

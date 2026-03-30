@@ -49,6 +49,7 @@ jobs:
             libxcb-keysyms1 \
             libxcb-render-util0 \
             libxcb-util1 \
+            libxcb-shape0 \
             libxcb-xinerama0 \
             libxcb-xkb1 \
             libxkbcommon-x11-0
@@ -64,10 +65,18 @@ jobs:
         run: |
           python -m pytest -q -p no:pytestqt tests/unit/test_settings.py tests/unit/test_hashing.py
 
-      - name: CLI help smoke
+      - name: CLI help smoke (Linux)
+        if: runner.os == 'Linux'
         working-directory: .
         run: |
           python -c "import subprocess, sys; p = subprocess.run([sys.executable, 'main.py', '--help'], capture_output=True, text=True, timeout=60); print(p.stdout); print(p.stderr, file=sys.stderr); raise SystemExit(p.returncode)"
+
+      - name: CLI help smoke (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        working-directory: .
+        run: |
+          python main.py --help
 
       - name: Build bundled app
         working-directory: .
