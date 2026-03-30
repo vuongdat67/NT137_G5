@@ -6,6 +6,15 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Explorer migrated to `QTableView` + `SampleTableModel` with paginated data binding
+- Scan worker migrated to `QRunnable` + `QThreadPool` to keep UI responsive
+- Central logging bootstrap (`config/logging_setup.py`) with console + rotating file sink
+- Global uncaught exception logging hooks for process/thread contexts
+- API global exception handler for server-side error logging
+- Security marker file `malware_samples/.noexec`
+- Benchmark script `scripts/benchmark_scan_1000_pe.py`
+- GUI screenshot helper `scripts/capture_gui_screenshot.py`
+- Benchmark documentation `docs/benchmark-scan-1000-pe.md`
 - Explorer bulk actions: flag selected and remove selected rows
 - Explorer export actions: filtered/selected JSONL and CSV
 - Report dataset exports with scope options
@@ -20,6 +29,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- GUI stylesheet switched to dark high-contrast palette
+- README expanded with CLI reference, screenshot section, benchmark guidance
 - Toolbar labels clarified: Open Files, Queue Folder, Fetch Intel
 - Intel fetch logs now include attempted/success/failed ZIP summary
 - Intel apply messaging now distinguishes not-in-local-DB cases

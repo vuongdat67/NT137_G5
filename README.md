@@ -14,11 +14,14 @@ A Python desktop tool for static malware analysis, feature extraction, local dat
 - Download malware ZIP samples and optional auto-scan
 - Explorer filtering, bulk flag/remove, and dataset export
 - Report tab with sample detail and dataset export scopes
+- Dark high-contrast GUI theme for long triage sessions
+- Centralized logging to console and rotating file logs
 
 ## Project Layout
 
 - `main.py`: CLI entrypoint and GUI launcher
 - `malware_analyzer/`: main package
+- `scripts/`: helper scripts (benchmark and screenshot capture)
 - `tests/`: unit/integration/e2e test skeleton
 - `output/`: runtime outputs (DB and generated artifacts)
 - `malware_samples/`: default downloaded sample folder
@@ -61,6 +64,36 @@ python main.py gui
 pytest -q
 ```
 
+## CLI Reference
+
+Main commands:
+
+- `python main.py scan <path> [--recursive] [--workers N] [--format json|csv|both] [--yara <dir>] [--no-heuristic] [--watch]`
+- `python main.py gui`
+- `python main.py serve --host 127.0.0.1 --port 8000`
+- `python main.py db stats|list|show|delete|export|import|tag|dedupe|rescore|recluster`
+- `python main.py intel fetch --mode "By Tag" --value exe --limit 100`
+- `python main.py report <sha256> --format html|pdf`
+- `python main.py watch <folder> --recursive`
+
+Use `--help` for command details:
+
+```powershell
+python main.py --help
+python main.py scan --help
+python main.py db --help
+```
+
+## GUI Screenshot
+
+![GUI Scan Tab](docs/images/gui-scan.png)
+
+To regenerate screenshot locally:
+
+```powershell
+python scripts/capture_gui_screenshot.py
+```
+
 ## Intel Download + Auto-Scan Workflow
 
 1. Open `Intel` tab
@@ -94,6 +127,13 @@ Notes:
 - Static analysis only; no sample execution.
 - Keep malware archives in isolated folders.
 - Do not upload live samples to public systems.
+- Review `malware_samples/.noexec` before handling downloaded artifacts.
+
+## Benchmark
+
+- Script: `scripts/benchmark_scan_1000_pe.py`
+- Output: `output/benchmarks/scan_1000_pe_*.json`
+- Report: `docs/benchmark-scan-1000-pe.md`
 
 ## Documentation
 

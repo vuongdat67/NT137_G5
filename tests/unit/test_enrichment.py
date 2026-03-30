@@ -42,8 +42,8 @@ def test_enrichment_includes_parser_prefixed_fields(tmp_path: Path, monkeypatch)
             "apk_permissions_count": 0,
         },
     )
-    monkeypatch.setattr("malware_analyzer.core.enrichment.yara_scan_file", lambda path: [])
-    monkeypatch.setattr("malware_analyzer.core.enrichment.yara_scan_bytes", lambda data: [])
+    monkeypatch.setattr("malware_analyzer.core.enrichment.yara_scan_file", lambda path, **kwargs: [])
+    monkeypatch.setattr("malware_analyzer.core.enrichment.yara_scan_bytes", lambda data, **kwargs: [])
 
     features = build_enrichment(sample, file_info)
 
