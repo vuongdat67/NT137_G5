@@ -12,11 +12,12 @@ license = { text = "MIT" }
 dependencies = [
     # ── Core Analysis ──────────────────────────────────────────────────────
     "lief==0.17.6",                  # PE/ELF/DEX parse, C++ binding (nhanh)
-    "pefile==2024.8.26",             # PE fallback + imphash
+    "pefile==2023.2.7",              # PE fallback + imphash (PyInstaller-compatible)
     "androguard==4.1.1",             # APK/DEX parse, CFG, permissions
     "capstone==5.0.7",               # disassembly x86/x64 (C binding)
     "yara-python==4.5.4",            # YARA rule engine
     "python-magic==0.4.27",          # file type detection (libmagic)
+    "python-magic-bin==0.4.14; sys_platform == 'win32'",  # bundled libmagic for Windows
 
     # ── Hashing ────────────────────────────────────────────────────────────
     "py-tlsh==4.12.1",               # fuzzy hash TLSH
@@ -88,6 +89,9 @@ dev = [
 advanced = [
     "angr==9.2.119",
     "malwarebazaar==0.2.8",
+]
+packaging = [
+    "pyinstaller==6.11.1",
 ]
 
 [project.scripts]

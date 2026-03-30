@@ -6,6 +6,10 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- PyInstaller spec file `malware_analyzer.spec`
+- Packaging smoke script `scripts/smoke_packaged_app.py`
+- Packaging guide `docs/packaging.md`
+- Cross-platform CI packaging workflow `.github/workflows/phase10-cross-platform.yml`
 - Explorer migrated to `QTableView` + `SampleTableModel` with paginated data binding
 - Scan worker migrated to `QRunnable` + `QThreadPool` to keep UI responsive
 - Central logging bootstrap (`config/logging_setup.py`) with console + rotating file sink
@@ -29,6 +33,9 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Makefile expanded with `build-windows`, `build-linux`, and `bundle-smoke` targets
+- Added Windows marker dependency `python-magic-bin` and locked `pyinstaller`
+- Pinned `pefile` to `2023.2.7` to resolve PyInstaller dependency conflict
 - GUI stylesheet switched to dark high-contrast palette
 - README expanded with CLI reference, screenshot section, benchmark guidance
 - Toolbar labels clarified: Open Files, Queue Folder, Fetch Intel

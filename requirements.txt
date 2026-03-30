@@ -1,10 +1,11 @@
 # Runtime dependencies (aligned with pyproject.toml)
 lief==0.17.6
-pefile==2024.8.26
+pefile==2023.2.7
 androguard==4.1.1
 capstone==5.0.7
 yara-python==4.5.4
 python-magic==0.4.27
+python-magic-bin==0.4.14; sys_platform == "win32"
 py-tlsh==4.12.1
 ssdeep-wheel==3.4.1.post1
 networkx==3.3
@@ -41,6 +42,7 @@ black==24.10.0
 ruff==0.8.4
 mypy==1.13.0
 pre-commit==4.0.1
+pyinstaller==6.11.1
 
 # Optional extras (install when needed)
 # ssdeep-wheel>=3.4
