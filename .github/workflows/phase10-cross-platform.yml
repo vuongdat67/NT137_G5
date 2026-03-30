@@ -64,6 +64,15 @@ jobs:
           python -m pip install .
           python -m pip install pytest==8.3.3 pytest-qt==4.5.0 pytest-asyncio==0.24.0 pytest-cov==6.0.0 pyinstaller==6.11.1
 
+      - name: Install Windows magic DLL runtime
+        if: runner.os == 'Windows'
+        shell: pwsh
+        working-directory: .
+        run: |
+          python -m pip uninstall -y python-magic python-magic-bin 2>$null
+          python -m pip install python-magic-bin==0.4.14
+          python -c "import magic,sys; print('magic module:', magic.__file__); print('python:', sys.executable)"
+
       - name: Unit smoke tests
         working-directory: .
         run: |
@@ -87,8 +96,6 @@ jobs:
         working-directory: .
         run: |
           export MPLCONFIGDIR="${RUNNER_TEMP}/mplconfig"
-          python -c "import pathlib, os; pathlib.Path(os.environ.get('MPLCONFIGDIR', '.')).mkdir(parents=True, exist_ok=True)"
-          python -c "import matplotlib.font_manager as fm; fm._load_fontmanager(try_read_cache=False)"
           python -m PyInstaller --noconfirm --clean malware_analyzer.spec
 
       - name: Smoke packaged binary

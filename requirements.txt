@@ -4,7 +4,7 @@ pefile==2023.2.7
 androguard==4.1.1
 capstone==5.0.7
 yara-python==4.5.4
-python-magic==0.4.27
+python-magic==0.4.27; sys_platform != "win32"
 python-magic-bin==0.4.14; sys_platform == "win32"
 py-tlsh==4.12.1
 ssdeep-wheel==3.4.1.post1

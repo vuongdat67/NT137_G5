@@ -16,7 +16,7 @@ dependencies = [
     "androguard==4.1.1",             # APK/DEX parse, CFG, permissions
     "capstone==5.0.7",               # disassembly x86/x64 (C binding)
     "yara-python==4.5.4",            # YARA rule engine
-    "python-magic==0.4.27",          # file type detection (libmagic)
+    "python-magic==0.4.27; sys_platform != 'win32'",  # file type detection (libmagic)
     "python-magic-bin==0.4.14; sys_platform == 'win32'",  # bundled libmagic for Windows
 
     # ── Hashing ────────────────────────────────────────────────────────────
