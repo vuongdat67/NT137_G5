@@ -23,6 +23,8 @@ jobs:
     env:
       QT_QPA_PLATFORM: offscreen
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      MPLBACKEND: Agg
+      PYTHONWARNINGS: "ignore::UserWarning"
 
     steps:
       - name: Checkout
@@ -84,6 +86,9 @@ jobs:
       - name: Build bundled app
         working-directory: .
         run: |
+          export MPLCONFIGDIR="${RUNNER_TEMP}/mplconfig"
+          python -c "import pathlib, os; pathlib.Path(os.environ.get('MPLCONFIGDIR', '.')).mkdir(parents=True, exist_ok=True)"
+          python -c "import matplotlib; matplotlib.font_manager._load_fontmanager(try_read_cache=False)"
           python -m PyInstaller --noconfirm --clean malware_analyzer.spec
 
       - name: Smoke packaged binary
