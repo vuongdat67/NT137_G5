@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
         python-version: ["3.11"]
 
     runs-on: ${{ matrix.os }}
@@ -57,6 +57,12 @@ jobs:
             libxcb-xkb1 \
             libxkbcommon-x11-0
 
+      - name: Install macOS system deps
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install libmagic
+
       - name: Install Python deps
         working-directory: .
         run: |
@@ -72,6 +78,26 @@ jobs:
           python -m pip uninstall -y python-magic python-magic-bin 2>$null
           python -m pip install python-magic-bin==0.4.14
           python -c "import magic,sys; print('magic module:', magic.__file__); print('python:', sys.executable)"
+
+      - name: Cross-platform import smoke
+        working-directory: .
+        run: |
+          python - <<'PY'
+          import importlib
+          modules = [
+              'magic',
+              'PyQt6',
+              'pyqtgraph',
+              'qt_material',
+              'pandas',
+              'numpy',
+              'sklearn',
+              'joblib',
+          ]
+          for name in modules:
+              importlib.import_module(name)
+              print(f'OK import: {name}')
+          PY
 
       - name: Unit smoke tests
         working-directory: .
