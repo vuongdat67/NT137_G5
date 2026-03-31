@@ -13,6 +13,8 @@ python main.py gui
 - Duplicate mode controls:
   - `Skip duplicates by SHA256`
   - `Force re-scan (ignore duplicate skip)`
+- Oversized ZIP members are skipped by configured limit; adjust in Settings:
+  - `Max archive member size (MB)`
 - Stop scan for hard interruption
 - Use Copy Log/Clear Log for operation logs
 
@@ -51,6 +53,8 @@ python main.py gui
 - Download ZIP samples
 - Optional auto-scan after download
 - Auto enrich local DB hashes from Intel source
+- Concurrency for enrich can be tuned in Settings:
+  - `Intel enrich workers`
 
 ## ML Tab
 

@@ -44,6 +44,19 @@
   - `python main.py intel fetch --mode "By Tag" --value exe --limit 100 --apply`
 - Enrich local hashes by get_info:
   - `python main.py intel enrich-local --limit 200 --batch-order "Natural"`
+  - `python main.py intel enrich-local --limit 400 --batch-order "Windows First" --workers 4`
+  - `python main.py intel enrich-local --limit 400 --batch-order "Natural" --force`
+
+## Benchmark & Intel Matrix Scripts
+
+- Run official scan matrix benchmark (1k/5k/10k):
+  - `python scripts/benchmark_scan_matrix.py --workers 4`
+- Run benchmark with quiet progress:
+  - `python scripts/benchmark_scan_matrix.py --workers 6 --no-progress`
+- Collect intel from file_type/tag/signature query matrix:
+  - `python scripts/collect_intel_matrix.py --limit-per-query 200 --apply`
+- Collect intel with custom query list:
+  - `python scripts/collect_intel_matrix.py --query file_type:exe --query tag:ransomware --query signature:RemcosRAT`
 
 ## Reports (`report`)
 
