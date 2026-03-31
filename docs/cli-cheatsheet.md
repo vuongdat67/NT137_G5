@@ -54,6 +54,9 @@
 
 ## ML (`ml`)
 
+- `models/model_log.jsonl` is auto-created after `ml train` and appended on each training run.
+- `ml report-latest` reads the newest record from `models/model_log.jsonl`.
+
 - Train model:
   - `python main.py ml train --input-csv output/phase11_features.csv --output-model models/family_classifier.joblib --algorithm auto`
 - Latest report markdown:

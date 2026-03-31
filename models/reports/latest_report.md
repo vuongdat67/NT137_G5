@@ -1,7 +1,7 @@
 # Latest ML Training Report
 
-- Version: v_20260331_014920
-- Timestamp (UTC): 2026-03-31T01:49:22.273264+00:00
+- Version: v_20260331_102652
+- Timestamp (UTC): 2026-03-31T10:26:54.385407+00:00
 - Algorithm: lightgbm
 - Label column: family
 - Samples: 272
@@ -11,10 +11,10 @@
 
 ## Artifacts
 
-- Model: models/family_classifier_20260331_014920.joblib
-- Input CSV: output/phase11_features.csv
-- Classification report: models/reports/family_classifier_classification_20260331_014920.md
-- Confusion matrix: models/reports/family_classifier_confusion_20260331_014920.png
+- Model: C:/Users/vuong/Documents/nt137/code/models/family_classifier_test_20260331_102652.joblib
+- Input CSV: C:/Users/vuong/Documents/nt137/code/output/test.csv
+- Classification report: C:/Users/vuong/Documents/nt137/code/models/reports/family_classifier_test_classification_20260331_102652.md
+- Confusion matrix: C:/Users/vuong/Documents/nt137/code/models/reports/family_classifier_test_confusion_20260331_102652.png
 
 ## Report-ready Summary
 
@@ -29,9 +29,9 @@ This experiment trains a static malware family classifier on exported feature ve
 | Class count | 40 |
 | Accuracy | 0.6364 |
 | F1 macro | 0.4333 |
-| Model path | models/family_classifier_20260331_014920.joblib |
-| Classification report | models/reports/family_classifier_classification_20260331_014920.md |
-| Confusion matrix | models/reports/family_classifier_confusion_20260331_014920.png |
+| Model path | C:/Users/vuong/Documents/nt137/code/models/family_classifier_test_20260331_102652.joblib |
+| Classification report | C:/Users/vuong/Documents/nt137/code/models/reports/family_classifier_test_classification_20260331_102652.md |
+| Confusion matrix | C:/Users/vuong/Documents/nt137/code/models/reports/family_classifier_test_confusion_20260331_102652.png |
 
 ## Classes
 
@@ -76,4 +76,4 @@ This experiment trains a static malware family classifier on exported feature ve
 - Win.Suspicious.Generic
 - Worm.Ramnit
 
-Source log: models/model_log.jsonl
+Source log: C:/Users/vuong/Documents/nt137/code/models/model_log.jsonl

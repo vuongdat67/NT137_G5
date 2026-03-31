@@ -10,6 +10,9 @@ python main.py gui
 
 - Add files or folders to queue
 - Start scan to extract hashes and static features
+- Duplicate mode controls:
+  - `Skip duplicates by SHA256`
+  - `Force re-scan (ignore duplicate skip)`
 - Stop scan for hard interruption
 - Use Copy Log/Clear Log for operation logs
 
@@ -48,11 +51,15 @@ python main.py gui
 - Download ZIP samples
 - Optional auto-scan after download
 - Auto enrich local DB hashes from Intel source
-- Run ML backfill directly from GUI (no CLI required):
-  - model path
-  - source/platform filter
-  - overwrite existing ML fields
-  - optional limit
+
+## ML Tab
+
+- Full ML workflow in GUI (aligned with CLI cheatsheet):
+  - Export Feature Matrix
+  - Run ML Train
+  - Run Report Latest
+  - Run ML Backfill
+  - Export ML Coverage (Markdown/JSON)
 
 ## ML Workflow (CLI)
 
