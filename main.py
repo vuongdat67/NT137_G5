@@ -1,3 +1,4 @@
+import multiprocessing
 import sys
 
 from loguru import logger
@@ -7,6 +8,8 @@ from malware_analyzer.config.logging_setup import configure_logging
 
 
 if __name__ == "__main__":
+    # Required for frozen Windows binaries that spawn child processes.
+    multiprocessing.freeze_support()
     wants_help = any(arg in {"-h", "--help"} for arg in sys.argv[1:])
     if not wants_help:
         configure_logging("cli")

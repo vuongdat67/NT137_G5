@@ -1,20 +1,20 @@
 # Latest ML Training Report
 
-- Version: v_20260401_020234
-- Timestamp (UTC): 2026-04-01T02:02:34.479419+00:00
+- Version: v_20260401_035747
+- Timestamp (UTC): 2026-04-01T03:57:49.742711+00:00
 - Algorithm: lightgbm
 - Label column: family
-- Samples: 19
-- Class count: 4
-- Accuracy: 0.2500
-- F1 macro: 0.1333
+- Samples: 375
+- Class count: 42
+- Accuracy: 0.6933
+- F1 macro: 0.5641
 
 ## Artifacts
 
-- Model: D:/NT137_G5/models/family_classifier_20260401_020234.joblib
+- Model: D:/NT137_G5/models/family_classifier_20260401_035747.joblib
 - Input CSV: D:/NT137_G5/output/phase11_features.csv
-- Classification report: D:/NT137_G5/models/reports/family_classifier_classification_20260401_020234.md
-- Confusion matrix: D:/NT137_G5/models/reports/family_classifier_confusion_20260401_020234.png
+- Classification report: D:/NT137_G5/models/reports/family_classifier_classification_20260401_035747.md
+- Confusion matrix: D:/NT137_G5/models/reports/family_classifier_confusion_20260401_035747.png
 
 ## Report-ready Summary
 
@@ -25,19 +25,57 @@ This experiment trains a static malware family classifier on exported feature ve
 | Metric | Value |
 |---|---:|
 | Algorithm | lightgbm |
-| Samples | 19 |
-| Class count | 4 |
-| Accuracy | 0.2500 |
-| F1 macro | 0.1333 |
-| Model path | D:/NT137_G5/models/family_classifier_20260401_020234.joblib |
-| Classification report | D:/NT137_G5/models/reports/family_classifier_classification_20260401_020234.md |
-| Confusion matrix | D:/NT137_G5/models/reports/family_classifier_confusion_20260401_020234.png |
+| Samples | 375 |
+| Class count | 42 |
+| Accuracy | 0.6933 |
+| F1 macro | 0.5641 |
+| Model path | D:/NT137_G5/models/family_classifier_20260401_035747.joblib |
+| Classification report | D:/NT137_G5/models/reports/family_classifier_classification_20260401_035747.md |
+| Confusion matrix | D:/NT137_G5/models/reports/family_classifier_confusion_20260401_035747.png |
 
 ## Classes
 
+- ACRStealer
+- AdaptixC2
+- Amadey
 - Android.Generic
+- Android.Riskware.Installer
+- Android.Suspicious.Generic
 - Android.Trojan.Overlay
 - Arsink
+- AsyncRAT
+- BankBot
+- CobaltStrike
+- CoinMiner
+- DCRat
+- DarkSideRAT
+- DarkTortilla
 - Emotet
+- Floxif
+- Formbook
+- GuLoader
+- Heodo
+- JackSkid
+- Joker
+- Kimwolf
+- Mirai
+- MossadProxy
+- PhantomStealer
+- QuasarRAT
+- RemcosRAT
+- RustyStealer
+- SalatStealer
+- SheetRAT
+- Smoke Loader
+- Socks5Systemz
+- SpyNote
+- ValleyRAT
+- Vidar
+- WannaCry
+- Win.Generic
+- Win.Injector.Generic
+- Win.Packed.Generic
+- Win.Suspicious.Generic
+- Worm.Ramnit
 
 Source log: D:/NT137_G5/models/model_log.jsonl

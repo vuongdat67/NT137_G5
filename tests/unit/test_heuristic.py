@@ -71,3 +71,26 @@ def test_heuristic_loads_override_weights_from_config(tmp_path, monkeypatch) -> 
     assert str(result["heuristic_verdict"]) == "CLEAN"
 
     heuristic._load_heuristic_config.cache_clear()
+
+
+def test_heuristic_android_suspicious_api_indicators_raise_score() -> None:
+    info = FileInfo(
+        file_path="sample.apk",
+        file_name="sample.apk",
+        file_size=12345,
+        file_type=FileType.APK,
+        platform="Android",
+    )
+    features = {
+        "api_imports": [
+            "Landroid/telephony/SmsManager;->sendTextMessage",
+            "Ljava/lang/Runtime;->exec",
+        ],
+        "apk_permissions": ["android.permission.INTERNET"],
+        "apk_is_self_signed": False,
+        "yara_matches": [],
+    }
+
+    result = score_features(info, features)
+    assert float(result["heuristic_score"]) > 0.0
+    assert any("Suspicious Android API indicators" in str(item) for item in result["heuristic_triggers"])

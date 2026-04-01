@@ -14,7 +14,7 @@ dependencies = [
     "lief==0.17.6",                  # PE/ELF/DEX parse, C++ binding (nhanh)
     "pefile==2023.2.7",              # PE fallback + imphash (PyInstaller-compatible)
     "androguard==4.1.1",             # APK/DEX parse, CFG, permissions
-    "capstone==5.0.7",               # disassembly x86/x64 (C binding)
+    "capstone==5.0.3",               # disassembly x86/x64 (C binding, angr-compatible)
     "yara-python==4.5.4",            # YARA rule engine
     "pyzipper==0.3.6",               # AES encrypted ZIP extraction (MalwareBazaar default)
     "python-magic==0.4.27; sys_platform != 'win32'",  # file type detection (libmagic)

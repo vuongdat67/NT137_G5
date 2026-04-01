@@ -90,6 +90,10 @@ def test_apk_parser_extracts_intents_api_calls_native_libs_and_strings(monkeypat
     assert isinstance(api_calls, list)
     assert any("SmsManager" in str(item) for item in api_calls)
 
+    api_classes = parsed.get("apk_api_classes", [])
+    assert isinstance(api_classes, list)
+    assert any("Landroid/telephony/SmsManager;" in str(item) for item in api_classes)
+
     strings = parsed.get("apk_strings", [])
     assert isinstance(strings, list)
     assert any("BOOT_COMPLETED" in str(item) for item in strings)
