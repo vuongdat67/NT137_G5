@@ -1,20 +1,20 @@
 # Latest ML Training Report
 
-- Version: v_20260331_102652
-- Timestamp (UTC): 2026-03-31T10:26:54.385407+00:00
+- Version: v_20260401_020234
+- Timestamp (UTC): 2026-04-01T02:02:34.479419+00:00
 - Algorithm: lightgbm
 - Label column: family
-- Samples: 272
-- Class count: 40
-- Accuracy: 0.6364
-- F1 macro: 0.4333
+- Samples: 19
+- Class count: 4
+- Accuracy: 0.2500
+- F1 macro: 0.1333
 
 ## Artifacts
 
-- Model: C:/Users/vuong/Documents/nt137/code/models/family_classifier_test_20260331_102652.joblib
-- Input CSV: C:/Users/vuong/Documents/nt137/code/output/test.csv
-- Classification report: C:/Users/vuong/Documents/nt137/code/models/reports/family_classifier_test_classification_20260331_102652.md
-- Confusion matrix: C:/Users/vuong/Documents/nt137/code/models/reports/family_classifier_test_confusion_20260331_102652.png
+- Model: D:/NT137_G5/models/family_classifier_20260401_020234.joblib
+- Input CSV: D:/NT137_G5/output/phase11_features.csv
+- Classification report: D:/NT137_G5/models/reports/family_classifier_classification_20260401_020234.md
+- Confusion matrix: D:/NT137_G5/models/reports/family_classifier_confusion_20260401_020234.png
 
 ## Report-ready Summary
 
@@ -25,55 +25,19 @@ This experiment trains a static malware family classifier on exported feature ve
 | Metric | Value |
 |---|---:|
 | Algorithm | lightgbm |
-| Samples | 272 |
-| Class count | 40 |
-| Accuracy | 0.6364 |
-| F1 macro | 0.4333 |
-| Model path | C:/Users/vuong/Documents/nt137/code/models/family_classifier_test_20260331_102652.joblib |
-| Classification report | C:/Users/vuong/Documents/nt137/code/models/reports/family_classifier_test_classification_20260331_102652.md |
-| Confusion matrix | C:/Users/vuong/Documents/nt137/code/models/reports/family_classifier_test_confusion_20260331_102652.png |
+| Samples | 19 |
+| Class count | 4 |
+| Accuracy | 0.2500 |
+| F1 macro | 0.1333 |
+| Model path | D:/NT137_G5/models/family_classifier_20260401_020234.joblib |
+| Classification report | D:/NT137_G5/models/reports/family_classifier_classification_20260401_020234.md |
+| Confusion matrix | D:/NT137_G5/models/reports/family_classifier_confusion_20260401_020234.png |
 
 ## Classes
 
-- ACRStealer
-- AdaptixC2
-- Amadey
 - Android.Generic
-- Android.Riskware.Installer
-- Android.Suspicious.Generic
 - Android.Trojan.Overlay
 - Arsink
-- AsyncRAT
-- BankBot
-- CobaltStrike
-- CoinMiner
-- DCRat
-- DarkSideRAT
-- DarkTortilla
-- Floxif
-- Formbook
-- GuLoader
-- Heodo
-- JackSkid
-- Joker
-- Kimwolf
-- Mirai
-- MossadProxy
-- PhantomStealer
-- QuasarRAT
-- RemcosRAT
-- RustyStealer
-- SalatStealer
-- SheetRAT
-- Smoke Loader
-- Socks5Systemz
-- SpyNote
-- Vidar
-- WannaCry
-- Win.Generic
-- Win.Injector.Generic
-- Win.Packed.Generic
-- Win.Suspicious.Generic
-- Worm.Ramnit
+- Emotet
 
-Source log: C:/Users/vuong/Documents/nt137/code/models/model_log.jsonl
+Source log: D:/NT137_G5/models/model_log.jsonl

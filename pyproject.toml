@@ -16,11 +16,13 @@ dependencies = [
     "androguard==4.1.1",             # APK/DEX parse, CFG, permissions
     "capstone==5.0.7",               # disassembly x86/x64 (C binding)
     "yara-python==4.5.4",            # YARA rule engine
+    "pyzipper==0.3.6",               # AES encrypted ZIP extraction (MalwareBazaar default)
     "python-magic==0.4.27; sys_platform != 'win32'",  # file type detection (libmagic)
     "python-magic-bin==0.4.14; sys_platform == 'win32'",  # bundled libmagic for Windows
 
     # ── Hashing ────────────────────────────────────────────────────────────
     "py-tlsh==4.12.1",               # fuzzy hash TLSH
+    "ssdeep-wheel==3.4.1.post1",    # fuzzy hash ssdeep (required for pip install .)
 
     # ── Graph / CFG ────────────────────────────────────────────────────────
     "networkx==3.3",                 # CFG graph construction
@@ -36,6 +38,8 @@ dependencies = [
     "httpx==0.28.1",                 # async HTTP cho intel clients
     "pydantic==2.10.3",
     "pydantic-settings==2.6.1",
+    "PyYAML==6.0.3",                 # runtime config loader (config.yaml)
+    "psutil==6.1.1",                 # benchmark CPU/IO sampling helper
 
     # ── CLI ────────────────────────────────────────────────────────────────
     "click==8.1.7",
@@ -72,7 +76,7 @@ dependencies = [
 
 [project.optional-dependencies]
 fuzzy = [
-    "ssdeep-wheel>=3.4",
+    "ssdeep-wheel==3.4.1.post1",
 ]
 ml = [
     "scikit-learn==1.5.2",

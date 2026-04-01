@@ -4,6 +4,7 @@ pefile==2023.2.7
 androguard==4.1.1
 capstone==5.0.7
 yara-python==4.5.4
+pyzipper==0.3.6
 python-magic==0.4.27; sys_platform != "win32"
 python-magic-bin==0.4.14; sys_platform == "win32"
 py-tlsh==4.12.1
@@ -17,6 +18,8 @@ uvicorn[standard]==0.32.1
 httpx==0.28.1
 pydantic==2.10.3
 pydantic-settings==2.6.1
+PyYAML==6.0.3
+psutil==6.1.1
 click==8.1.7
 rich==13.9.4
 tqdm==4.67.1
@@ -46,9 +49,8 @@ pre-commit==4.0.1
 pyinstaller==6.11.1
 
 # Optional extras (install when needed)
-# ssdeep-wheel>=3.4
-# angr==9.2.119
-# malwarebazaar==0.2.8
-# scikit-learn==1.5.2
-# lightgbm==4.5.0
-# joblib==1.4.2
+angr==9.2.119
+malwarebazaar==0.2.8
+scikit-learn==1.5.2
+lightgbm==4.5.0
+joblib==1.4.2
