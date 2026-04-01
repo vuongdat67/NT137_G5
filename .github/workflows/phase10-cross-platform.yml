@@ -148,3 +148,4 @@ jobs:
         with:
           name: malware_analyzer-${{ matrix.os }}
           path: dist/malware_analyzer
+          include-hidden-files: true
