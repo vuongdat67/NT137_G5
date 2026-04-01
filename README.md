@@ -48,6 +48,12 @@ pip install -e ".[dev,packaging]"
 
 This installs ML dependencies too (scikit-learn/lightgbm/joblib), so the ML tab works after a fresh clone.
 
+For macOS users: LightGBM requires OpenMP runtime. Install once with:
+
+```bash
+brew install libmagic libomp
+```
+
 Alternative (if you prefer requirements file):
 
 ```powershell

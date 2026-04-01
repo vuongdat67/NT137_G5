@@ -61,7 +61,12 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew update
-          brew install libmagic
+          brew install libmagic libomp
+
+      - name: Configure macOS libomp runtime path
+        if: runner.os == 'macOS'
+        run: |
+          echo "DYLD_FALLBACK_LIBRARY_PATH=$(brew --prefix libomp)/lib:${DYLD_FALLBACK_LIBRARY_PATH}" >> "$GITHUB_ENV"
 
       - name: Install Python deps
         working-directory: .
