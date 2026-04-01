@@ -220,4 +220,6 @@ config.yaml
 .vscode/
 *.zip
 config.yaml
-models/
+# models/
+bin/
+data/

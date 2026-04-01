@@ -67,9 +67,7 @@ jobs:
         working-directory: .
         run: |
           python -m pip install --upgrade pip "setuptools>=72,<81" wheel
-          python -m pip install .
-          python -m pip install scikit-learn==1.5.2 joblib==1.4.2
-          python -m pip install pytest==8.3.3 pytest-qt==4.5.0 pytest-asyncio==0.24.0 pytest-cov==6.0.0 pyinstaller==6.11.1
+          python -m pip install -e ".[dev,packaging]"
 
       - name: Verify pkg_resources compatibility
         working-directory: .
@@ -103,6 +101,7 @@ jobs:
               'numpy',
               'sklearn',
               'joblib',
+              'lightgbm',
           ]
           for name in modules:
               importlib.import_module(name)

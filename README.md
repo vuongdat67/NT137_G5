@@ -43,8 +43,10 @@ python -m venv .venv
 2. Install dependencies
 
 ```powershell
-pip install -e ".[dev]"
+pip install -e ".[dev,packaging]"
 ```
+
+This installs ML dependencies too (scikit-learn/lightgbm/joblib), so the ML tab works after a fresh clone.
 
 Alternative (if you prefer requirements file):
 
