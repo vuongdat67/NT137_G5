@@ -39,7 +39,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            python3.11-dev \
             libmagic1 \
             libmagic-dev \
             libxcb-cursor0 \
