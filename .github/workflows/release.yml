@@ -20,10 +20,6 @@ jobs:
             artifact_name: malware_analyzer-linux-amd64
             ext: ""
             archive: tar.gz
-          - os: macos-13
-            artifact_name: malware_analyzer-darwin-amd64
-            ext: ""
-            archive: tar.gz
           - os: macos-latest
             artifact_name: malware_analyzer-darwin-arm64
             ext: ""

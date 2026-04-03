@@ -30,6 +30,10 @@ All notable changes to this project are documented in this file.
 - Additional packer signature hints: MPRESS, ASPACK, PETITE
 - Documentation set under `docs/` and project README
 - Repository hygiene files: `.gitattributes`
+- Binary malware security gate pipeline (`malware_analyzer/ml/security_gate.py`) with train/predict/backfill/report artifacts
+- CLI commands for security gate train/backfill under `main.py ml`
+- GUI Step 6 panel for security gate train/backfill in ML tab
+- Family model production preset toggle for CLI/GUI training (`--production-preset`)
 
 ### Changed
 
@@ -42,6 +46,11 @@ All notable changes to this project are documented in this file.
 - Intel fetch logs now include attempted/success/failed ZIP summary
 - Intel apply messaging now distinguishes not-in-local-DB cases
 - ZIP downloader handles binary payloads safely before JSON parsing
+- Family model training now supports stronger imbalance control with production-safe defaults (min class samples and class capping)
+- Training/report displays use 4-decimal threshold/probability formatting to avoid `1.000` rounding confusion
+- PR curve legends now show precise selected/best threshold values
+- Release matrix now uses supported macOS runner target only (arm64 build)
+- Linux CI/release dependencies updated for Ubuntu 24.04 compatibility (`libegl1`, `libgl1`; removed `python3.11-dev`)
 
 ### Fixed
 
@@ -49,6 +58,8 @@ All notable changes to this project are documented in this file.
 - Intel download UTF-8 decode crash when payload is ZIP data
 - Intel view syntax regression from malformed patch insertion
 - Reduced parser warning noise in GUI logs for malformed import tables
+- Ubuntu CI import smoke failure for PyQt/pyqtgraph caused by missing `libEGL.so.1`
+- Family backfill "errors" on low-confidence rows clarified as threshold abstain behavior (not inference crash)
 
 ## [2026-03-27]
 
