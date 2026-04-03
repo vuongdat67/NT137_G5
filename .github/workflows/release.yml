@@ -96,12 +96,31 @@ jobs:
         run: |
           python scripts/smoke_packaged_app.py
 
+      - name: Build onefile convenience exe (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          python -m PyInstaller --noconfirm --clean --onefile --name malware_analyzer_onefile --distpath dist_onefile --workpath build_onefile main.py
+
+      - name: Smoke onefile convenience exe (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          .\dist_onefile\malware_analyzer_onefile.exe --help
+
       - name: Package artifacts (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          Copy-Item "dist/malware_analyzer/malware_analyzer.exe" "${{ matrix.artifact_name }}.exe"
           Compress-Archive -Path "dist/malware_analyzer/*" -DestinationPath "${{ matrix.artifact_name }}.zip"
+          Copy-Item "dist_onefile/malware_analyzer_onefile.exe" "${{ matrix.artifact_name }}-onefile.exe"
+          Set-Content -Path "${{ matrix.artifact_name }}-onefile-NOTES.txt" -Value @'
+          Windows onefile convenience build.
+          Trade-offs:
+          - Startup can be slower than onedir zip build.
+          - AV false positives are more likely for self-extracting onefile binaries.
+          - For production use, prefer malware_analyzer-windows-amd64.zip.
+          '@
 
       - name: Package artifacts (Linux/macOS)
         if: runner.os != 'Windows'
@@ -154,5 +173,6 @@ jobs:
             all_binaries/*.exe
             all_binaries/*.zip
             all_binaries/*.tar.gz
+            all_binaries/*-NOTES.txt
             malware_analyzer-binaries.zip
           fail_on_unmatched_files: true
