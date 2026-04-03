@@ -24,7 +24,7 @@ jobs:
             artifact_name: malware_analyzer-windows-amd64
             ext: exe
             archive: zip
-          - os: ubuntu-latest
+          - os: ubuntu-22.04
             artifact_name: malware_analyzer-linux-amd64
             ext: ""
             archive: tar.gz
@@ -88,21 +88,24 @@ jobs:
           python -m pip install --upgrade pip "setuptools>=72,<81" wheel
           pip install -e ".[dev,packaging]"
 
-      - name: Build binary with PyInstaller (onefile)
+      - name: Build bundled app
         run: |
-          python -m PyInstaller --noconfirm --clean --onefile --name malware_analyzer main.py
+          python -m PyInstaller --noconfirm --clean malware_analyzer.spec
+
+      - name: Smoke packaged app
+        run: |
+          python scripts/smoke_packaged_app.py
 
       - name: Package artifacts (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          Copy-Item "dist/malware_analyzer.exe" "${{ matrix.artifact_name }}.exe"
-          Compress-Archive -Path "dist/malware_analyzer.exe" -DestinationPath "${{ matrix.artifact_name }}.zip"
+          Copy-Item "dist/malware_analyzer/malware_analyzer.exe" "${{ matrix.artifact_name }}.exe"
+          Compress-Archive -Path "dist/malware_analyzer/*" -DestinationPath "${{ matrix.artifact_name }}.zip"
 
       - name: Package artifacts (Linux/macOS)
         if: runner.os != 'Windows'
         run: |
-          cp dist/malware_analyzer ${{ matrix.artifact_name }}
           tar -czf ${{ matrix.artifact_name }}.tar.gz -C dist malware_analyzer
 
       - name: Upload binaries

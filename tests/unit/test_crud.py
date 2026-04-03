@@ -168,3 +168,42 @@ def test_crud_merge_csv(tmp_path: Path, monkeypatch) -> None:
 
     monkeypatch.delenv("MSA_OUTPUT_DIR", raising=False)
     get_settings.cache_clear()
+
+
+def test_crud_merge_csv_large_field(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setenv("MSA_OUTPUT_DIR", str(tmp_path / "output"))
+    get_settings.cache_clear()
+    init_db()
+
+    csv_path = tmp_path / "merge_large.csv"
+    large_value = "A" * 200_000
+    rows = [
+        {
+            "sha256": SHA1,
+            "file_name": "large_field.bin",
+            "file_path": "/tmp/large_field.bin",
+            "file_size": "2048",
+            "platform": "Windows",
+            "source": "Local",
+            "raw_json": json.dumps({"note": large_value}),
+        }
+    ]
+
+    with csv_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0].keys()))
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+
+    crud = SampleCRUD()
+    inserted, updated, skipped = crud.merge_csv(csv_path)
+    assert inserted == 1
+    assert updated == 0
+    assert skipped == 0
+
+    sample = crud.get_by_sha256(SHA1)
+    assert sample is not None
+    assert sample["file_name"] == "large_field.bin"
+
+    monkeypatch.delenv("MSA_OUTPUT_DIR", raising=False)
+    get_settings.cache_clear()

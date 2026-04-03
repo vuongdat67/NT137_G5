@@ -1,5 +1,17 @@
 import multiprocessing
 import sys
+import warnings
+
+warnings.filterwarnings(
+    "ignore",
+    message=r"pkg_resources is deprecated as an API.*",
+    category=UserWarning,
+)
+warnings.filterwarnings(
+    "ignore",
+    message=r"The pkg_resources package is slated for removal.*",
+    category=UserWarning,
+)
 
 from loguru import logger
 
