@@ -113,8 +113,8 @@ jobs:
         shell: pwsh
         run: |
           Compress-Archive -Path "dist/malware_analyzer/*" -DestinationPath "${{ matrix.artifact_name }}.zip"
-          Copy-Item "dist_onefile/malware_analyzer_onefile.exe" "${{ matrix.artifact_name }}-onefile.exe"
-          Set-Content -Path "${{ matrix.artifact_name }}-onefile-NOTES.txt" -Value @'
+          Copy-Item "dist_onefile/malware_analyzer_onefile.exe" "${{ matrix.artifact_name }}.exe"
+          Set-Content -Path "${{ matrix.artifact_name }}-NOTES.txt" -Value @'
           Windows onefile convenience build.
           Trade-offs:
           - Startup can be slower than onedir zip build.
