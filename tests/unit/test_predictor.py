@@ -59,3 +59,33 @@ def test_predictor_prefers_stronger_versioned_bundle_when_default_is_weak(tmp_pa
     result = predictor.predict_from_features({"platform": "Windows", "source": "Local"})
     assert result is not None
     assert str(result.get("ml_family")) == "Strong"
+
+
+def test_predictor_rejects_low_f1_bundle_at_runtime(tmp_path: Path, monkeypatch) -> None:
+    model = tmp_path / "family_classifier.joblib"
+    _write_bundle(model, samples=240, class_count=18, label="LowQuality")
+
+    bundle = joblib.load(model)
+    bundle["metrics"]["f1_macro"] = 0.45
+    joblib.dump(bundle, model)
+
+    predictor._bundle_cache = None
+    monkeypatch.setattr(predictor, "DEFAULT_MODEL_PATH", model)
+
+    result = predictor.predict_from_features({"platform": "Windows", "source": "Local"})
+    assert result is None
+
+
+def test_predictor_applies_selected_confidence_threshold(tmp_path: Path, monkeypatch) -> None:
+    model = tmp_path / "family_classifier.joblib"
+    _write_bundle(model, samples=240, class_count=18, label="Thresholded")
+
+    bundle = joblib.load(model)
+    bundle["threshold_tuning"] = {"selected_threshold": 0.95}
+    joblib.dump(bundle, model)
+
+    predictor._bundle_cache = None
+    monkeypatch.setattr(predictor, "DEFAULT_MODEL_PATH", model)
+
+    result = predictor.predict_from_features({"platform": "Windows", "source": "Local"})
+    assert result is None

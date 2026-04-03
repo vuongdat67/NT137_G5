@@ -1,20 +1,27 @@
 # Latest ML Training Report
 
-- Version: v_20260401_104940
-- Timestamp (UTC): 2026-04-01T10:49:43.285286+00:00
+- Version: v_20260403_014941
+- Timestamp (UTC): 2026-04-03T01:49:43.210897+00:00
 - Algorithm: lightgbm
 - Label column: family
-- Samples: 3262
-- Class count: 47
-- Accuracy: 0.9556
-- F1 macro: 0.5007
+- Samples: 1096
+- Class count: 12
+- Accuracy: 0.9727
+- F1 macro: 0.8769
+- Selected threshold: 0.9942
+- Threshold policy: recall_target
+- Threshold precision: 0.9852
+- Threshold recall: 0.9091
+- Threshold F1: 0.9456
+- Threshold coverage: 0.9227
 
 ## Artifacts
 
-- Model: D:/NT137_G5/models/family_classifier_20260401_104940.joblib
-- Input CSV: D:/NT137_G5/output/phase11_features.csv
-- Classification report: D:/NT137_G5/models/reports/family_classifier_classification_20260401_104940.md
-- Confusion matrix: D:/NT137_G5/models/reports/family_classifier_confusion_20260401_104940.png
+- Model: models/family_classifier_20260403_014941.joblib
+- Input CSV: output/phase11_features.csv
+- Classification report: models/reports/family_classifier_classification_20260403_014941.md
+- Confusion matrix: models/reports/family_classifier_confusion_20260403_014941.png
+- PR curve: models/reports/family_classifier_pr_curve_20260403_014941.png
 
 ## Report-ready Summary
 
@@ -25,62 +32,33 @@ This experiment trains a static malware family classifier on exported feature ve
 | Metric | Value |
 |---|---:|
 | Algorithm | lightgbm |
-| Samples | 3262 |
-| Class count | 47 |
-| Accuracy | 0.9556 |
-| F1 macro | 0.5007 |
-| Model path | D:/NT137_G5/models/family_classifier_20260401_104940.joblib |
-| Classification report | D:/NT137_G5/models/reports/family_classifier_classification_20260401_104940.md |
-| Confusion matrix | D:/NT137_G5/models/reports/family_classifier_confusion_20260401_104940.png |
+| Samples | 1096 |
+| Class count | 12 |
+| Accuracy | 0.9727 |
+| F1 macro | 0.8769 |
+| Selected threshold | 0.9942 |
+| Threshold precision | 0.9852 |
+| Threshold recall | 0.9091 |
+| Threshold F1 | 0.9456 |
+| Threshold coverage | 0.9227 |
+| Model path | models/family_classifier_20260403_014941.joblib |
+| Classification report | models/reports/family_classifier_classification_20260403_014941.md |
+| Confusion matrix | models/reports/family_classifier_confusion_20260403_014941.png |
+| PR curve | models/reports/family_classifier_pr_curve_20260403_014941.png |
 
 ## Classes
 
 - ACRStealer
-- AdaptixC2
-- AgentTesla
-- Amadey
 - Android.Generic
 - Android.Riskware.Installer
-- Android.Suspicious.Generic
 - Android.Trojan.Overlay
 - Arsink
-- AsyncRAT
-- BankBot
-- CoinMiner
-- ConnectWise
-- DCRat
-- DarkTortilla
-- Formbook
-- Fuery
-- Gh0stRAT
-- GuLoader
 - JackSkid
-- Joker
-- Kimwolf
-- LummaStealer
-- Mirai
-- MossadProxy
-- OffLoader
-- PhantomStealer
-- Phorpiex
-- QuasarRAT
-- RatonRAT
-- RemcosRAT
-- RustyStealer
 - SalatStealer
-- SheetRAT
-- Smoke Loader
-- SnappyClient
-- SpyNote
-- Stealc
-- Triada
-- VENON
-- ValleyRAT
 - Vidar
-- WannaCry
 - Win.Generic
 - Win.Injector.Generic
 - Win.Packed.Generic
 - Win.Suspicious.Generic
 
-Source log: D:/NT137_G5/models/model_log.jsonl
+Source log: models/model_log.jsonl

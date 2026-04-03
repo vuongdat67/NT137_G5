@@ -1,4 +1,4 @@
-# Packaging and Distribution (Phase 10)
+# Packaging and Distribution
 
 ## Targets
 
@@ -16,7 +16,8 @@
 
 - `malware_analyzer.spec`
 - `scripts/smoke_packaged_app.py`
-- `.github/workflows/phase10-cross-platform.yml`
+- `.github/workflows/ci.yml`
+- `.github/workflows/release.yml`
 
 ## Build Commands
 
@@ -44,9 +45,15 @@ python scripts/smoke_packaged_app.py
 
 ## Cross-platform Check
 
-- GitHub Actions workflow: `.github/workflows/phase10-cross-platform.yml`
-- Matrix: `windows-latest`, `ubuntu-latest`
-- Steps: install deps, run unit smoke tests, run CLI help smoke, build PyInstaller bundle, run packaged smoke test.
+- GitHub Actions workflow: `.github/workflows/ci.yml`
+- Matrix: `windows-latest`, `ubuntu-latest`, `macos-latest`
+- Steps: install system deps, install Python deps, run targeted tests, run CLI smoke, build PyInstaller bundle, run packaged smoke test.
+
+## Release Build
+
+- GitHub Actions workflow: `.github/workflows/release.yml`
+- Trigger: manual (`workflow_dispatch`) or Git tag (`v*`)
+- Output: platform binaries + bundled archives + one all-in-one zip artifact
 
 ## Fresh VM Installer Checklist
 
@@ -63,5 +70,5 @@ Use a clean VM (no source repo, no Python preinstalled unless needed by policy):
 
 - Windows local build: done (`PyInstaller` build completed on 2026-03-30)
 - Windows packaged smoke test: done (`malware_analyzer.exe --help` passed)
-- Linux build: automated via `.github/workflows/phase10-cross-platform.yml`
+- Linux build: automated via `.github/workflows/ci.yml`
 - Fresh VM installer test: pending manual run

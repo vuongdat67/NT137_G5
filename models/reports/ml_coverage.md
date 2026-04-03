@@ -4,24 +4,24 @@
 
 | Metric | Value |
 |---|---:|
-| Total samples | 4143 |
-| Covered samples | 4143 |
+| Total samples | 3799 |
+| Covered samples | 3799 |
 | Coverage % | 100.00 |
 
 ## Coverage by Source
 
 | Source | Total | Covered | Coverage % |
 |---|---:|---:|---:|
-| Local | 3757 | 3757 | 100.00 |
-| MalwareBazaar | 386 | 386 | 100.00 |
+| Local | 3414 | 3414 | 100.00 |
+| MalwareBazaar | 385 | 385 | 100.00 |
 
 ## Coverage by Family (Top by sample count)
 
 | Family | Total | Covered | Coverage % |
 |---|---:|---:|---:|
-| Win.Generic | 1909 | 1909 | 100.00 |
-| Unknown.Generic | 841 | 841 | 100.00 |
+| Win.Generic | 1886 | 1886 | 100.00 |
 | Win.Packed.Generic | 706 | 706 | 100.00 |
+| Unknown.Generic | 520 | 520 | 100.00 |
 | Win.Injector.Generic | 257 | 257 | 100.00 |
 | Win.Suspicious.Generic | 112 | 112 | 100.00 |
 | Android.Riskware.Installer | 30 | 30 | 100.00 |
