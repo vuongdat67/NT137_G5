@@ -2,6 +2,11 @@ name: Release Multi-Platform Binaries
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to publish assets to (for manual reruns)"
+        required: false
+        type: string
   push:
     tags:
       - "v*"
@@ -111,6 +116,8 @@ jobs:
   finalize:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
@@ -128,3 +135,21 @@ jobs:
         with:
           name: malware_analyzer-all-in-one
           path: malware_analyzer-binaries.zip
+
+      - name: Validate release tag
+        run: |
+          if [ -z "${RELEASE_TAG}" ]; then
+            echo "RELEASE_TAG is empty. For workflow_dispatch, provide input 'tag' (e.g. v1.0.2)."
+            exit 1
+          fi
+
+      - name: Publish release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          files: |
+            all_binaries/*.exe
+            all_binaries/*.zip
+            all_binaries/*.tar.gz
+            malware_analyzer-binaries.zip
+          fail_on_unmatched_files: true
