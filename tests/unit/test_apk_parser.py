@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import zipfile
 from pathlib import Path
 
 from malware_analyzer.core.models import FileInfo, FileType
@@ -98,3 +99,85 @@ def test_apk_parser_extracts_intents_api_calls_native_libs_and_strings(monkeypat
     assert isinstance(strings, list)
     assert any("BOOT_COMPLETED" in str(item) for item in strings)
     assert bool(parsed.get("apk_is_self_signed", False)) is True
+
+
+# ---------------------------------------------------------------------------
+# Native ELF analysis tests
+# ---------------------------------------------------------------------------
+
+def test_native_lib_features_no_lief(monkeypatch, tmp_path: Path) -> None:
+    """When LIEF is unavailable, all ELF fields are empty/false."""
+    monkeypatch.setattr("malware_analyzer.core.parsers.apk_parser._lief", None)
+    sample = tmp_path / "sample.apk"
+    sample.write_bytes(b"PK\x03\x04")
+    result = APKParser._extract_native_lib_features(sample)
+    assert result["apk_native_libs_has_elf"] is False
+    assert result["apk_native_libs_analyzed_count"] == 0
+    assert result["apk_native_libs_imports"] == []
+    assert result["apk_native_libs_exports"] == []
+    assert result["apk_native_libs_suspicious_imports"] == []
+
+
+def test_native_lib_features_detects_suspicious_symbols(monkeypatch, tmp_path: Path) -> None:
+    """Suspicious native symbols (ptrace, socket) are flagged; harmless ones are not."""
+
+    class _FakeSym:
+        def __init__(self, name: str) -> None:
+            self.name = name
+
+    class _FakeELF:
+        imported_symbols = [_FakeSym("ptrace"), _FakeSym("socket"), _FakeSym("__android_log_print")]
+        exported_symbols = [_FakeSym("JNI_OnLoad")]
+
+    class _FakeLief:
+        @staticmethod
+        def parse(data: object) -> _FakeELF:
+            return _FakeELF()
+
+    monkeypatch.setattr("malware_analyzer.core.parsers.apk_parser._lief", _FakeLief)
+
+    apk_path = tmp_path / "sample.apk"
+    with zipfile.ZipFile(apk_path, "w") as zf:
+        zf.writestr("lib/arm64-v8a/libnative.so", b"\x7fELF" + b"\x00" * 60)
+
+    result = APKParser._extract_native_lib_features(apk_path)
+
+    assert result["apk_native_libs_has_elf"] is True
+    assert result["apk_native_libs_analyzed_count"] == 1
+    assert "ptrace" in result["apk_native_libs_suspicious_imports"]
+    assert "socket" in result["apk_native_libs_suspicious_imports"]
+    assert "__android_log_print" not in result["apk_native_libs_suspicious_imports"]
+    assert "JNI_OnLoad" in result["apk_native_libs_exports"]
+    assert "ptrace" in result["apk_native_libs_imports"]
+
+
+def test_native_lib_features_no_so_files(monkeypatch, tmp_path: Path) -> None:
+    """APK with no .so files returns empty ELF result even when LIEF is present."""
+    apk_path = tmp_path / "sample.apk"
+    with zipfile.ZipFile(apk_path, "w") as zf:
+        zf.writestr("classes.dex", b"DEX\n035\x00")
+
+    result = APKParser._extract_native_lib_features(apk_path)
+
+    assert result["apk_native_libs_has_elf"] is False
+    assert result["apk_native_libs_analyzed_count"] == 0
+
+
+def test_native_lib_keys_present_in_full_parse(monkeypatch, tmp_path: Path) -> None:
+    """Full APK parse always returns the five native ELF output keys."""
+    monkeypatch.setattr("malware_analyzer.core.parsers.apk_parser.AndroguardAPK", _FakeAPK)
+    monkeypatch.setattr("malware_analyzer.core.parsers.apk_parser._lief", None)
+
+    sample = tmp_path / "sample.apk"
+    sample.write_bytes(b"PK\x03\x04")
+    parser = APKParser()
+    parsed = parser.parse(sample, _apk_info(sample), sample.read_bytes())
+
+    for key in (
+        "apk_native_libs_imports",
+        "apk_native_libs_exports",
+        "apk_native_libs_suspicious_imports",
+        "apk_native_libs_has_elf",
+        "apk_native_libs_analyzed_count",
+    ):
+        assert key in parsed, f"Missing key: {key}"
