@@ -7,6 +7,9 @@ A Python desktop tool for static malware analysis, feature extraction, local dat
 - Static scan for PE/APK/ELF-like binaries
 - Hashing: MD5/SHA1/SHA256/TLSH/ssdeep/imphash (when available)
 - String extraction, URL/IP extraction
+- Obfuscation scoring (entropy/strings density/RWX/overlay/import profile)
+- Multi-signal stacking multiplier for obfuscation confidence
+- Low-confidence warning when obfuscation is high but corroborating signals are weak
 - Lightweight CFG metrics: nodes/edges/cyclomatic
 - Opcode profile and API import extraction
 - Packer hints (UPX/MPRESS/ASPACK/PETITE/high entropy)
