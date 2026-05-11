@@ -1,27 +1,27 @@
 # Latest ML Training Report
 
-- Version: v_20260403_014941
-- Timestamp (UTC): 2026-04-03T01:49:43.210897+00:00
-- Algorithm: lightgbm
+- Version: v_20260511_080848
+- Timestamp (UTC): 2026-05-11T08:08:53.482381+00:00
+- Algorithm: rf
 - Label column: family
-- Samples: 1096
-- Class count: 12
-- Accuracy: 0.9727
-- F1 macro: 0.8769
-- Selected threshold: 0.9942
+- Samples: 3245
+- Class count: 47
+- Accuracy: 0.9445
+- F1 macro: 0.4830
+- Selected threshold: 0.5205
 - Threshold policy: recall_target
-- Threshold precision: 0.9852
-- Threshold recall: 0.9091
-- Threshold F1: 0.9456
-- Threshold coverage: 0.9227
+- Threshold precision: 0.9866
+- Threshold recall: 0.9060
+- Threshold F1: 0.9446
+- Threshold coverage: 0.9183
 
 ## Artifacts
 
-- Model: models/family_classifier_20260403_014941.joblib
-- Input CSV: output/phase11_features.csv
-- Classification report: models/reports/family_classifier_classification_20260403_014941.md
-- Confusion matrix: models/reports/family_classifier_confusion_20260403_014941.png
-- PR curve: models/reports/family_classifier_pr_curve_20260403_014941.png
+- Model: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/family_classifier_20260511_080848.joblib
+- Input CSV: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/output/phase11_features.csv
+- Classification report: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_classification_20260511_080848.md
+- Confusion matrix: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_confusion_20260511_080848.png
+- PR curve: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_pr_curve_20260511_080848.png
 
 ## Report-ready Summary
 
@@ -31,34 +31,69 @@ This experiment trains a static malware family classifier on exported feature ve
 ### Result Table
 | Metric | Value |
 |---|---:|
-| Algorithm | lightgbm |
-| Samples | 1096 |
-| Class count | 12 |
-| Accuracy | 0.9727 |
-| F1 macro | 0.8769 |
-| Selected threshold | 0.9942 |
-| Threshold precision | 0.9852 |
-| Threshold recall | 0.9091 |
-| Threshold F1 | 0.9456 |
-| Threshold coverage | 0.9227 |
-| Model path | models/family_classifier_20260403_014941.joblib |
-| Classification report | models/reports/family_classifier_classification_20260403_014941.md |
-| Confusion matrix | models/reports/family_classifier_confusion_20260403_014941.png |
-| PR curve | models/reports/family_classifier_pr_curve_20260403_014941.png |
+| Algorithm | rf |
+| Samples | 3245 |
+| Class count | 47 |
+| Accuracy | 0.9445 |
+| F1 macro | 0.4830 |
+| Selected threshold | 0.5205 |
+| Threshold precision | 0.9866 |
+| Threshold recall | 0.9060 |
+| Threshold F1 | 0.9446 |
+| Threshold coverage | 0.9183 |
+| Model path | /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/family_classifier_20260511_080848.joblib |
+| Classification report | /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_classification_20260511_080848.md |
+| Confusion matrix | /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_confusion_20260511_080848.png |
+| PR curve | /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_pr_curve_20260511_080848.png |
 
 ## Classes
 
 - ACRStealer
+- AdaptixC2
+- AgentTesla
+- Amadey
 - Android.Generic
 - Android.Riskware.Installer
+- Android.Suspicious.Generic
 - Android.Trojan.Overlay
 - Arsink
+- AsyncRAT
+- BankBot
+- CoinMiner
+- ConnectWise
+- DCRat
+- DarkTortilla
+- Formbook
+- Fuery
+- Gh0stRAT
+- GuLoader
 - JackSkid
+- Joker
+- Kimwolf
+- LummaStealer
+- Mirai
+- MossadProxy
+- OffLoader
+- PhantomStealer
+- Phorpiex
+- QuasarRAT
+- RatonRAT
+- RemcosRAT
+- RustyStealer
 - SalatStealer
+- SheetRAT
+- Smoke Loader
+- SnappyClient
+- SpyNote
+- Stealc
+- Triada
+- VENON
+- ValleyRAT
 - Vidar
+- WannaCry
 - Win.Generic
 - Win.Injector.Generic
 - Win.Packed.Generic
 - Win.Suspicious.Generic
 
-Source log: models/model_log.jsonl
+Source log: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/model_log.jsonl

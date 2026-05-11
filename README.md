@@ -202,6 +202,22 @@ Notes:
 - Script: `scripts/benchmark_scan_1000_pe.py`
 - Output: `output/benchmarks/scan_1000_pe_*.json`
 - Report: `docs/benchmark-scan-1000-pe.md`
+- Model comparison: `scripts/benchmark_models.py`
+
+## Benchmark Models
+
+Run a multi-model comparison on exported features and get a summary table, best-model confusion matrix, and feature importance (when supported):
+
+```bash
+python scripts/benchmark_models.py --input-csv output/phase11_features.csv --output-dir output/benchmarks
+```
+
+Outputs (timestamped):
+
+- `output/benchmarks/benchmark_models_*.csv`
+- `output/benchmarks/benchmark_models_*.md`
+- `output/benchmarks/benchmark_models_best_confusion_*.png`
+- `output/benchmarks/benchmark_models_best_features_*.csv`
 
 ## Documentation
 

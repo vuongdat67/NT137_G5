@@ -1,0 +1,145 @@
+{
+  "overall": {
+    "total": 3805,
+    "covered": 3799,
+    "coverage_pct": 99.84
+  },
+  "by_source": [
+    {
+      "source": "Local",
+      "total": 3420,
+      "covered": 3414,
+      "coverage_pct": 99.82
+    },
+    {
+      "source": "MalwareBazaar",
+      "total": 385,
+      "covered": 385,
+      "coverage_pct": 100.0
+    }
+  ],
+  "by_family": [
+    {
+      "family": "Win.Generic",
+      "total": 1887,
+      "covered": 1886,
+      "coverage_pct": 99.95
+    },
+    {
+      "family": "Win.Packed.Generic",
+      "total": 710,
+      "covered": 706,
+      "coverage_pct": 99.44
+    },
+    {
+      "family": "Unknown.Generic",
+      "total": 520,
+      "covered": 520,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "Win.Injector.Generic",
+      "total": 258,
+      "covered": 257,
+      "coverage_pct": 99.61
+    },
+    {
+      "family": "Win.Suspicious.Generic",
+      "total": 112,
+      "covered": 112,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "Android.Riskware.Installer",
+      "total": 30,
+      "covered": 30,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "Android.Trojan.Overlay",
+      "total": 17,
+      "covered": 17,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "Arsink",
+      "total": 17,
+      "covered": 17,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "Android.Generic",
+      "total": 14,
+      "covered": 14,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "Vidar",
+      "total": 14,
+      "covered": 14,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "ACRStealer",
+      "total": 12,
+      "covered": 12,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "SalatStealer",
+      "total": 12,
+      "covered": 12,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "JackSkid",
+      "total": 11,
+      "covered": 11,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "Joker",
+      "total": 9,
+      "covered": 9,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "RemcosRAT",
+      "total": 9,
+      "covered": 9,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "SpyNote",
+      "total": 9,
+      "covered": 9,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "RustyStealer",
+      "total": 8,
+      "covered": 8,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "ValleyRAT",
+      "total": 8,
+      "covered": 8,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "AsyncRAT",
+      "total": 7,
+      "covered": 7,
+      "coverage_pct": 100.0
+    },
+    {
+      "family": "AdaptixC2",
+      "total": 6,
+      "covered": 6,
+      "coverage_pct": 100.0
+    }
+  ],
+  "family_limit": 20,
+  "family_distinct": 88
+}
