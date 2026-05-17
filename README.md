@@ -219,6 +219,23 @@ Outputs (timestamped):
 - `output/benchmarks/benchmark_models_best_confusion_*.png`
 - `output/benchmarks/benchmark_models_best_features_*.csv`
 
+## Benchmark Feature Groups (Ablation)
+
+Compare model performance across feature subsets (file-level, CFG, strings/API, opcodes, etc.):
+
+```bash
+python scripts/benchmark_models_features.py \
+  --input-csv output/phase11_features.csv \
+  --groups all,file,cfg,strings_api,opcodes,categorical
+```
+
+Outputs (timestamped):
+
+- `output/benchmarks/benchmark_models_features_*.csv`
+- `output/benchmarks/benchmark_models_features_*.md`
+- `output/benchmarks/benchmark_models_features_ranking_*.csv`
+- `output/benchmarks/benchmark_models_features_ranking_*.md`
+
 ## Documentation
 
 See the `docs/` folder:
