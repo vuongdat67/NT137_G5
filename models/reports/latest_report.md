@@ -1,27 +1,27 @@
 # Latest ML Training Report
 
-- Version: v_20260511_080848
-- Timestamp (UTC): 2026-05-11T08:08:53.482381+00:00
-- Algorithm: rf
+- Version: v_20260517_072056
+- Timestamp (UTC): 2026-05-17T07:21:01.003921+00:00
+- Algorithm: decision_tree
 - Label column: family
 - Samples: 3245
 - Class count: 47
 - Accuracy: 0.9445
-- F1 macro: 0.4830
-- Selected threshold: 0.5205
+- F1 macro: 0.4896
+- Selected threshold: 1.0000
 - Threshold policy: recall_target
-- Threshold precision: 0.9866
-- Threshold recall: 0.9060
-- Threshold F1: 0.9446
-- Threshold coverage: 0.9183
+- Threshold precision: 0.9445
+- Threshold recall: 0.9445
+- Threshold F1: 0.9445
+- Threshold coverage: 1.0000
 
 ## Artifacts
 
-- Model: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/family_classifier_20260511_080848.joblib
-- Input CSV: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/output/phase11_features.csv
-- Classification report: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_classification_20260511_080848.md
-- Confusion matrix: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_confusion_20260511_080848.png
-- PR curve: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_pr_curve_20260511_080848.png
+- Model: models/family_classifier_20260517_072056.joblib
+- Input CSV: output/phase11_features.csv
+- Classification report: models/reports/family_classifier_classification_20260517_072056.md
+- Confusion matrix: models/reports/family_classifier_confusion_20260517_072056.png
+- PR curve: models/reports/family_classifier_pr_curve_20260517_072056.png
 
 ## Report-ready Summary
 
@@ -31,20 +31,20 @@ This experiment trains a static malware family classifier on exported feature ve
 ### Result Table
 | Metric | Value |
 |---|---:|
-| Algorithm | rf |
+| Algorithm | decision_tree |
 | Samples | 3245 |
 | Class count | 47 |
 | Accuracy | 0.9445 |
-| F1 macro | 0.4830 |
-| Selected threshold | 0.5205 |
-| Threshold precision | 0.9866 |
-| Threshold recall | 0.9060 |
-| Threshold F1 | 0.9446 |
-| Threshold coverage | 0.9183 |
-| Model path | /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/family_classifier_20260511_080848.joblib |
-| Classification report | /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_classification_20260511_080848.md |
-| Confusion matrix | /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_confusion_20260511_080848.png |
-| PR curve | /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/reports/family_classifier_pr_curve_20260511_080848.png |
+| F1 macro | 0.4896 |
+| Selected threshold | 1.0000 |
+| Threshold precision | 0.9445 |
+| Threshold recall | 0.9445 |
+| Threshold F1 | 0.9445 |
+| Threshold coverage | 1.0000 |
+| Model path | models/family_classifier_20260517_072056.joblib |
+| Classification report | models/reports/family_classifier_classification_20260517_072056.md |
+| Confusion matrix | models/reports/family_classifier_confusion_20260517_072056.png |
+| PR curve | models/reports/family_classifier_pr_curve_20260517_072056.png |
 
 ## Classes
 
@@ -96,4 +96,4 @@ This experiment trains a static malware family classifier on exported feature ve
 - Win.Packed.Generic
 - Win.Suspicious.Generic
 
-Source log: /Users/ngaphan/Library/Mobile Documents/iCloud~md~obsidian/Documents/CTFOb/01 - Subject/Kì 6/NT137-Kỹ thuật phân tích mã độc/NT137_G5/models/model_log.jsonl
+Source log: models/model_log.jsonl

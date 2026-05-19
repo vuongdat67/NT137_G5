@@ -206,7 +206,7 @@ Notes:
 
 ## Benchmark Models
 
-Run a multi-model comparison on exported features and get a summary table, best-model confusion matrix, and feature importance (when supported):
+Run a multi-model comparison on exported features and get an accuracy ranking table, best-model confusion matrix, and feature importance (when supported):
 
 ```bash
 python scripts/benchmark_models.py --input-csv output/phase11_features.csv --output-dir output/benchmarks
@@ -214,10 +214,14 @@ python scripts/benchmark_models.py --input-csv output/phase11_features.csv --out
 
 Outputs (timestamped):
 
-- `output/benchmarks/benchmark_models_*.csv`
-- `output/benchmarks/benchmark_models_*.md`
-- `output/benchmarks/benchmark_models_best_confusion_*.png`
-- `output/benchmarks/benchmark_models_best_features_*.csv`
+- `output/benchmarks/DD.MM.YYYY_HH.MM_models_rank_acc.csv`
+- `output/benchmarks/DD.MM.YYYY_HH.MM_models_rank_acc.md`
+- `output/benchmarks/DD.MM.YYYY_HH.MM_models_best_confusion.png`
+- `output/benchmarks/DD.MM.YYYY_HH.MM_models_best_features.csv`
+
+Note:
+
+- `XGBoost` requires numeric class labels for multi-class training. The benchmark script encodes labels for XGBoost only, then decodes predictions back to the original family names for scoring.
 
 ## Benchmark Feature Groups (Ablation)
 

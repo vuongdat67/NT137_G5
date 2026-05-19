@@ -147,6 +147,7 @@ def _available_models() -> list[ModelSpec]:
                     learning_rate=0.05,
                     subsample=0.9,
                     colsample_bytree=0.9,
+                    verbose=-1,
                     random_state=42,
                 ),
             )
@@ -190,38 +191,6 @@ def _make_pipeline(spec: ModelSpec) -> Any:
             ("classifier", estimator),
         ]
     )
-
-
-def _infer_proba(model: Any, x_test: pd.DataFrame) -> np.ndarray | None:
-    if hasattr(model, "predict_proba"):
-        try:
-            return model.predict_proba(x_test)
-        except Exception:
-            return None
-    if hasattr(model, "decision_function"):
-        try:
-            return model.decision_function(x_test)
-        except Exception:
-            return None
-    return None
-
-
-def _roc_auc(y_true: np.ndarray, scores: np.ndarray | None) -> float | None:
-    if scores is None:
-        return None
-
-    from sklearn.metrics import roc_auc_score
-
-    if scores.ndim == 1:
-        try:
-            return float(roc_auc_score(y_true, scores))
-        except Exception:
-            return None
-
-    try:
-        return float(roc_auc_score(y_true, scores, multi_class="ovr", average="macro"))
-    except Exception:
-        return None
 
 
 def _feature_importance(model: Any, feature_names: list[str]) -> pd.DataFrame | None:
@@ -293,7 +262,7 @@ def run_benchmark(
     )
 
     label_encoder = LabelEncoder()
-    y_test_encoded = label_encoder.fit_transform(y_test)
+    label_encoder.fit(y)
 
     rows: list[dict[str, Any]] = []
     best_name = ""
@@ -304,15 +273,18 @@ def run_benchmark(
     for spec in _available_models():
         model = _make_pipeline(spec)
         start_train = time.perf_counter()
-        model.fit(x_train, y_train)
+        if spec.name == "XGBoost":
+            y_train_encoded = label_encoder.transform(y_train)
+            model.fit(x_train, y_train_encoded)
+        else:
+            model.fit(x_train, y_train)
         train_time = time.perf_counter() - start_train
 
         start_infer = time.perf_counter()
         y_pred = model.predict(x_test)
+        if spec.name == "XGBoost":
+            y_pred = label_encoder.inverse_transform(y_pred)
         infer_time = time.perf_counter() - start_infer
-
-        scores = _infer_proba(model, x_test)
-        auc = _roc_auc(y_test_encoded, None if scores is None else np.array(scores))
 
         accuracy = float(accuracy_score(y_test, y_pred))
         f1_macro = float(f1_score(y_test, y_pred, average="macro", zero_division=0))
@@ -326,7 +298,6 @@ def run_benchmark(
                 "f1_macro": f1_macro,
                 "precision_macro": precision,
                 "recall_macro": recall,
-                "auc_roc": auc if auc is not None else "",
                 "train_time_s": round(train_time, 4),
                 "infer_time_s": round(infer_time, 4),
             }
@@ -339,26 +310,28 @@ def run_benchmark(
             best_y_pred = y_pred
 
     summary = pd.DataFrame(rows)
-    timestamp = datetime.now(tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(tz=timezone.utc).strftime("%d.%m.%Y_%H.%M")
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    csv_path = output_dir / f"benchmark_models_{timestamp}.csv"
-    md_path = output_dir / f"benchmark_models_{timestamp}.md"
-    summary.to_csv(csv_path, index=False)
-    try:
-        md_text = summary.to_markdown(index=False)
-    except Exception:
-        md_lines = []
-        headers = list(summary.columns)
-        md_lines.append("| " + " | ".join(headers) + " |")
-        md_lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
-        for _, row in summary.iterrows():
-            md_lines.append("| " + " | ".join(str(row[col]) for col in headers) + " |")
-        md_text = "\n".join(md_lines)
-    md_path.write_text(md_text, encoding="utf-8")
+    ranking_csv_path = output_dir / f"{timestamp}_models_rank_acc.csv"
+    ranking_md_path = output_dir / f"{timestamp}_models_rank_acc.md"
 
-    confusion_path = output_dir / f"benchmark_models_best_confusion_{timestamp}.png"
-    features_path = output_dir / f"benchmark_models_best_features_{timestamp}.csv"
+    ranking = summary.sort_values(by="accuracy", ascending=False).reset_index(drop=True)
+    ranking.to_csv(ranking_csv_path, index=False)
+    try:
+        ranking_md_text = ranking.to_markdown(index=False)
+    except Exception:
+        ranking_md_lines = []
+        ranking_headers = list(ranking.columns)
+        ranking_md_lines.append("| " + " | ".join(ranking_headers) + " |")
+        ranking_md_lines.append("| " + " | ".join(["---"] * len(ranking_headers)) + " |")
+        for _, row in ranking.iterrows():
+            ranking_md_lines.append("| " + " | ".join(str(row[col]) for col in ranking_headers) + " |")
+        ranking_md_text = "\n".join(ranking_md_lines)
+    ranking_md_path.write_text(ranking_md_text, encoding="utf-8")
+
+    confusion_path = output_dir / f"{timestamp}_models_best_confusion.png"
+    features_path = output_dir / f"{timestamp}_models_best_features.csv"
 
     if best_model is not None and best_y_pred is not None:
         labels = sorted({str(item) for item in y.tolist()})
@@ -391,8 +364,8 @@ def run_benchmark(
             features_path = Path("")
 
     return {
-        "summary_csv": csv_path,
-        "summary_md": md_path,
+        "ranking_accuracy_csv": ranking_csv_path,
+        "ranking_accuracy_md": ranking_md_path,
         "confusion_png": confusion_path,
         "feature_importance_csv": features_path,
         "best_model": Path(best_name),
